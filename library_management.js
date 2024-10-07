@@ -35,6 +35,9 @@ class Section{
     listBooks(){
     this.books.forEach(x=>{console.log(`${x.title} written by ${x.author}, ISBN ${x.ISBN}, Availability:${x.isAvailable}`)});
     }
+    calculateTotalBooksAvailable(){
+    this.books
+    }
 }
 class Patron{
     constructor(name){
@@ -55,7 +58,12 @@ delete this.borrowBooks[index];
 book.isAvailable===true;
 }
 }
-
+class VIPPatron extends Patron{
+    constructor(name,priority){
+        super(name);
+        this.priority=priority;
+    }
+}
 // Create sections
 const fiction = new Section("Fiction");
 const science = new Section("Science");
