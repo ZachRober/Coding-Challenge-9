@@ -29,14 +29,15 @@ class Section{
     this.books.push(book);
     }
     getAvailableBooks(){
-    console.log(this.books.filter(x=>x.isAvailable===true).length);
-    return;
+    let newarr = this.books.filter(x=>x.isAvailable===true);
+    let length = newarr.length;
+    return length;
     }
     listBooks(){
     this.books.forEach(x=>{console.log(`${x.title} written by ${x.author}, ISBN ${x.ISBN}, Availability:${x.isAvailable}`)});
     }
     calculateTotalBooksAvailable(){
-    this.books
+    this.bor
     }
 }
 class Patron{
@@ -45,17 +46,19 @@ class Patron{
         this.borrowBooks=[];
     }
 borrowBook(book){
-if (book.isAvailable===true){
+if (book.isAvailable===true ){
     console.log(`You have borrowed ${book.title}`);
     this.borrowBooks.push(book);
-    book.isAvailable===false;
+    book.isAvailable=false;
+    
 }
 else{console.log(`${book.title} is not available`)};
 }
 returnBook(book){
 let index = this.borrowBooks.findIndex(x=>book.title===x.title);
 delete this.borrowBooks[index];
-book.isAvailable===true;
+console.log(`${book.title} is now available`)
+book.isAvailable=true;
 }
 }
 class VIPPatron extends Patron{
@@ -63,8 +66,8 @@ class VIPPatron extends Patron{
         super(name);
         this.priority=priority;
     }
-    borrowBook(){
-    super.borrowBook();    
+    borrowBook(book){
+    super.borrowBook(book);    
     }
 }
 // Create sections
@@ -79,10 +82,12 @@ fiction.addBook(book1);
 fiction.addBook(book2);
 science.addBook(book3);
 // Create patrons
+const Jeff = new Patron("Jeff Goldstein");
 const regularPatron = new Patron("John Doe");
 const vipPatron = new VIPPatron("Jane Smith", true);
 // Regular patron tries to borrow a book
 regularPatron.borrowBook(book1);
+Jeff.borrowBook(book1)
 // VIP patron tries to borrow a book (has priority)
 vipPatron.borrowBook(book1);
 // Return the book
