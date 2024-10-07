@@ -3,17 +3,17 @@ class Book {
         this.title=title;
         this.author=author;
         this.ISBN=ISBN;
-        this.isAvailable=isAvailable;
+        this._isAvailable=isAvailable;
     }
     getDetails(){
         return `The title of the book is ${this.book} written by ${this.author}, ISBN:${this.ISBN}`;
     }
     get isAvailable(){
-        return this.isAvailable
+        return this._isAvailable
     }
     set isAvailable(update){
     if(update===true||update===false){
-    this.isAvailable=update;
+    this._isAvailable=update;
     }
     else{
     console.log("not valid input");
@@ -33,8 +33,27 @@ class Section{
     return;
     }
     listBooks(){
-    this.books.forEach(x=>{console.log(`${x.title} written by ${x.author}, ISBN ${x.ISBN}, Availability:${x.isAvailable}`)})
+    this.books.forEach(x=>{console.log(`${x.title} written by ${x.author}, ISBN ${x.ISBN}, Availability:${x.isAvailable}`)});
     }
+}
+class Patron{
+    constructor(name){
+        this.name=name;
+        this.borrowBooks=[];
+    }
+borrowBook(book){
+if (book.isAvailable===true){
+    console.log(`You have borrowed ${book.title}`);
+    this.borrowBooks.push(book);
+    book.isAvailable===false;
+}
+else{console.log(`${book.title} is not available`)};
+}
+returnBook(book){
+let index = this.borrowBooks.findIndex(x=>book.title===x.title);
+delete this.borrowBooks[index];
+book.isAvailable===true;
+}
 }
 
 // Create sections
