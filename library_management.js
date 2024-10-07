@@ -63,6 +63,9 @@ class VIPPatron extends Patron{
         super(name);
         this.priority=priority;
     }
+    borrowBook(){
+    super.borrowBook();    
+    }
 }
 // Create sections
 const fiction = new Section("Fiction");
