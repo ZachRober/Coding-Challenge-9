@@ -46,7 +46,7 @@ class Patron{
         this.borrowBooks=[];
     }
 borrowBook(book){
-if (book.isAvailable===true ){
+if (book.isAvailable===true){
     console.log(`You have borrowed ${book.title}`);
     this.borrowBooks.push(book);
     book.isAvailable=false;
