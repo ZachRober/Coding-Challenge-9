@@ -9,14 +9,14 @@ class Book {
         return `The title of the book is ${this.book} written by ${this.author}, ISBN:${this.ISBN}`;
     }
     get isAvailable(){
-        return this._isAvailable
+        return this._isAvailable//returns private value
     }
     set isAvailable(update){
     if(update===true||update===false){
-    this._isAvailable=update;
+    this._isAvailable=update;//returns whether book is available or not
     }
     else{
-    console.log("not valid input");
+    console.log("not valid input");//checks whether it exists
     }
     }   
 }
@@ -26,19 +26,17 @@ class Section{
         this.books = [];
     }
     addBook(book){
-    this.books.push(book);
-    }
-    getAvailableBooks(){
-    let newarr = this.books.filter(x=>x.isAvailable===true);
-    let length = newarr.length;
-    return length;
-    }
-    listBooks(){
-    this.books.forEach(x=>{console.log(`${x.title} written by ${x.author}, ISBN ${x.ISBN}, Availability:${x.isAvailable}`)});
+    this.books.push(book);//pushes new book to our books array
     }
     calculateTotalBooksAvailable(){
-    this.bor
+    let newarr = this.books.filter(x=>x.isAvailable===true);//calculates total books that are available
+    let length = newarr.length;
+    return length;
+    }//I did not include a get available books because it does the same thing as the method above
+    listBooks(){
+    this.books.forEach(x=>{console.log(`${x.title} written by ${x.author}, ISBN ${x.ISBN}, Availability:${x.isAvailable}`)});//list books in the section
     }
+   
 }
 class Patron{
     constructor(name){
@@ -49,7 +47,7 @@ borrowBook(book){
 if (book.isAvailable===true){
     console.log(`You have borrowed ${book.title}`);
     this.borrowBooks.push(book);
-    book.isAvailable=false;
+    book.isAvailable=false;//checks if book is available then makes it unavailable 
     
 }
 else{console.log(`${book.title} is not available`)};
@@ -58,15 +56,15 @@ returnBook(book){
 let index = this.borrowBooks.findIndex(x=>book.title===x.title);
 delete this.borrowBooks[index];
 console.log(`${book.title} is now available`)
-book.isAvailable=true;
+book.isAvailable=true;//allows the book to be returned
 }
 }
 class VIPPatron extends Patron{
-    constructor(name,priority){
+    constructor(name,priority){//extends the parent and gives priority
         super(name);
         this.priority=priority;
     }
-    borrowBook(book){
+    borrowBook(book){//overides the original method giving priority
     super.borrowBook(book);    
     }
 }
@@ -87,7 +85,6 @@ const regularPatron = new Patron("John Doe");
 const vipPatron = new VIPPatron("Jane Smith", true);
 // Regular patron tries to borrow a book
 regularPatron.borrowBook(book1);
-Jeff.borrowBook(book1)
 // VIP patron tries to borrow a book (has priority)
 vipPatron.borrowBook(book1);
 // Return the book
@@ -95,5 +92,5 @@ regularPatron.returnBook(book1);
 // List books and availability
 fiction.listBooks();
 // Calculate total available books in each section
-console.log(`Total available books in Fiction: ${fiction.getAvailableBooks()}`);
-console.log(`Total available books in Science: ${science.getAvailableBooks()}`);
+console.log(`Total available books in Fiction: ${fiction.calculateTotalBooksAvailable()}`);
+console.log(`Total available books in Science: ${science.calculateTotalBooksAvailable()}`);
